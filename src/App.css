@@ -1,0 +1,204 @@
+/* -----------------------------App component-------------------------*/
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(2, 1, 7),
+    rgb(45, 45, 53),
+    rgb(244, 246, 247)
+  );
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+.nav {
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgb(134, 120, 120);
+}
+.logo {
+  color: white;
+  font-size: 3em;
+  font-family: "Engagement", cursive;
+}
+.input {
+  padding: 5px 10px;
+  outline: none;
+  font-size: 1.3em;
+  border: none;
+  height: 30px;
+}
+.search-bar {
+  height: 40px;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  color: rgb(161, 156, 156);
+}
+.add {
+  position: relative;
+  top: -200px;
+  left: 50px;
+  cursor: pointer;
+  color: white;
+  font-size: 2em;
+  margin: 20px 0px 20px 95%;
+  border-radius: 50%;
+  margin-bottom: 200px;
+}
+.form-control {
+  margin-bottom: 10px;
+  height: 50px;
+  border-radius: 20px;
+  padding-left: 20px;
+  font-size: 2em;
+  outline: none;
+}
+/*-------------------------list component----------------------------*/
+.list {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 200px auto 20px;
+}
+.film {
+  width: 230px;
+  margin: 20px;
+  background-color: rgba(3, 2, 2, 0.8);
+  box-shadow: 0 0 10px rgb(58, 55, 55);
+  overflow: hidden;
+  color: azure;
+  text-align: center;
+}
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  color: azure;
+}
+.rate {
+  font-size: 1.2em;
+  color: azure;
+}
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px auto;
+}
+.add-movie {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 20px;
+  font-size: 0.8em;
+}
+.trail,
+.fav,
+.delete {
+  cursor: pointer;
+  border-radius: 10px;
+  color: antiquewhite;
+  background-color: rgb(22, 121, 38);
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.nejma {
+  color: yellow;
+}
+.delete {
+  background-color: red;
+}
+.image {
+  height: 250px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+/*---------------------------DESCRIPTION COMPONENT--------------------------------*/
+.desfilm {
+  width: 90%;
+  background-color: rgba(20, 18, 18, 0.5);
+  text-align: center;
+  margin: auto;
+  height: 100vh;
+}
+.desimage {
+  width: 25%;
+  margin: 0px auto 20px;
+  height: 400px;
+}
+.destitle {
+  font-size: 4em;
+  font-weight: bold;
+}
+.headerdesc {
+  font-size: 5em;
+  font-weight: bold;
+}
+.desrate {
+  font-size: 2em;
+}
+.desdesc {
+  font-size: 1.5em;
+}
+/*---------------------------Favourites Component----------------------------------*/
+.myfav {
+  text-align: center;
+  color: azure;
+  font-size: 2em;
+}
+.fav-content {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: rgb(255, 0, 55);
+}
+.cancel {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  margin: 20px auto;
+  border-radius: 50%;
+  font-weight: bold;
+}
+.modal {
+  position: fixed;
+  background-color: rgba(190, 188, 176, 0.7);
+  width: 40%;
+  text-align: center;
+  z-index: 10;
+  border-radius: 30px;
+  margin-top: -15%;
+}
+.modalheader {
+  font-size: 2.5em;
+  margin-bottom: -5px;
+}
+.modif {
+  background-color: chocolate;
+}
+.modimp {
+  margin: 10px auto;
+  width: 70%;
+  height: 30px;
+  border-radius: 10px;
+  padding-left: 20px;
+  font-size: 1.5em;
+}
