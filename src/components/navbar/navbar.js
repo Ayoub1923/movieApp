@@ -1,30 +1,30 @@
 import React from "react";
-import "./App.css";
-
+import { Link } from "react-router-dom";
+import SignUp from '../signup/sign'
 export default class Navbar extends React.Component {
   state = {
-    star1: "",
-    star2: "",
-    star3: "",
-    star4: "",
-    star5: "",
+    star1: "black",
+    star2: "black",
+    star3: "black",
+    star4: "black",
+    star5: "black",
   };
   st1 = (e) => {
     this.setState({
       star1: "yellow",
-      star2: "gray",
-      star3: "gray",
-      star4: "gray",
-      star5: "gray",
+      star2: "black",
+      star3: "black",
+      star4: "black",
+      star5: "black",
     });
   };
   st2 = (e) => {
     this.setState({
       star1: "yellow",
       star2: "yellow",
-      star3: "gray",
-      star4: "gray",
-      star5: "gray",
+      star3: "black",
+      star4: "black",
+      star5: "black",
     });
   };
   st3 = (e) => {
@@ -32,8 +32,8 @@ export default class Navbar extends React.Component {
       star1: "yellow",
       star2: "yellow",
       star3: "yellow",
-      star4: "gray",
-      star5: "gray",
+      star4: "black",
+      star5: "black",
     });
   };
   st4 = (e) => {
@@ -42,7 +42,7 @@ export default class Navbar extends React.Component {
       star2: "yellow",
       star3: "yellow",
       star4: "yellow",
-      star5: "gray",
+      star5: "black",
     });
   };
   st5 = (e) => {
@@ -57,7 +57,11 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <div className="nav">
-        <div className="logo">Ciné Simplon</div>
+        <div className="logo">Ciné Scoop</div>
+        <div >
+         <span > <Link className="routes" to="/">Home</Link></span>
+         <span > <Link className="routes" to="/favourites">My favourites</Link></span>
+        </div>
         <span className="search-bar">
           <i className="fa loop fa-search"></i>
           <input
@@ -66,11 +70,10 @@ export default class Navbar extends React.Component {
             className="input"
             type="text"
           ></input>
-          <div>
+          <div className="starfield">
             <p>
-              {" "}
               <span
-                style={{ color: "yellow" }}
+                style={{ color: this.state.star1 }}
                 onClick={() => {
                   this.st1();
                   this.props.searchRate(1);
@@ -122,6 +125,7 @@ export default class Navbar extends React.Component {
             </p>
           </div>
         </span>
+        <SignUp />
       </div>
     );
   }

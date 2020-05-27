@@ -1,16 +1,16 @@
 import React from "react";
-import List from "./list";
-import Navbar from "./navbar";
-import Modal from "./modal";
+import List from "./components/list/list";
+import Navbar from "./components/navbar/navbar";
 import { BrowserRouter, Route } from "react-router-dom";
-import Favourites from "./favourites";
-import Description from "./description";
+import Favourites from "./components/favourites/favourites";
+import Description from "./components/description/description";
+import "./App.css";
 let films = [
   {
     name: "Shawshunk redemption",
     rate: "★★★★",
     description:
-      "A 'A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..life-affirming' tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..",
+      "A 'A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..life-affirming' tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations.",
     img:
       "https://images-na.ssl-images-amazon.com/images/I/91s2I7v2a4L._AC_SY445_.jpg",
   },
@@ -18,17 +18,9 @@ let films = [
     name: "Law abiding citizen",
     rate: "★★★★",
     description:
-      "A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..",
+      "Law Abiding Citizen is a 2009 American vigilante action-thriller film[3][4][5] directed by F. Gary Gray from a screenplay written by Kurt Wimmer. It stars Gerard Butler and Jamie Foxx and takes place in Philadelphia, telling the story of a man driven to seek justice while targeting not only his family's killer but also those who have supported a corrupt criminal justice system, intending to assassinate anyone supporting the system. Law Abiding Citizen was released theatrically in North America on October 16, 2009.",
     img:
       "https://i.pinimg.com/originals/09/e6/a1/09e6a11c932a8aa4a857c6cd4e6530fc.jpg",
-  },
-  {
-    name: "The departed",
-    rate: "★★★",
-    description:
-      "A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..",
-    img:
-      "https://prodimage.images-bn.com/pimages/0012569736740_p0_v4_s550x406.jpg",
   },
   {
     name: "Limitless",
@@ -36,6 +28,13 @@ let films = [
     description:
       "A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..",
     img: "https://fr.web.img3.acsta.net/medias/nmedia/18/82/56/25/19720797.jpg",
+  },
+  {
+    name: "Inception",
+    rate: "★★★",
+    description:
+      "A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..",
+    img: "https://fr.web.img2.acsta.net/medias/nmedia/18/72/34/14/19476654.jpg",
   },
   {
     name: "Cast away",
@@ -69,11 +68,12 @@ let films = [
       "https://i.pinimg.com/originals/b0/2b/03/b02b03a39edae6b457eb5843ef8b7199.jpg",
   },
   {
-    name: "Inception",
+    name: "The departed",
     rate: "★★★",
     description:
       "A life-affirming tale about life imprisonment, THE SHAWSHANK REDEMPTION is the kind of old-fashioned entertainment that is easily overvalued in an era of diminishing expectations. This reverent adaptation of an unremarkable 1982 Stephen King novella was received tepidly at the box office--due in part to advertising that offered no clue as to what the..",
-    img: "https://fr.web.img2.acsta.net/medias/nmedia/18/72/34/14/19476654.jpg",
+    img:
+      "https://prodimage.images-bn.com/pimages/0012569736740_p0_v4_s550x406.jpg",
   },
   {
     name: "The persuite of happiness",
@@ -107,6 +107,7 @@ export default class App extends React.Component {
     newFilm: object,
     favtab: [],
     desc: [],
+    visibility: "hidden",
   };
   searchBN = (e) => {
     let char = e.target.value;
@@ -119,9 +120,12 @@ export default class App extends React.Component {
     } else return this.setState({ clone: movies });
   };
   inputChange = (e) => {
-    let saisie = { ...this.state.newFilm, [e.target.name]: e.target.value };
-    this.setState({ newFilm: saisie });
-    console.log(this.state.newFilm);
+    if (e.target.name === "rate")
+      this.state.newFilm.rate = "★".repeat(e.target.value);
+    else {
+      let saisie = { ...this.state.newFilm, [e.target.name]: e.target.value };
+      this.state.newFilm = saisie;
+    }
   };
   addFilm = () => {
     films.unshift(this.state.newFilm);
@@ -131,7 +135,12 @@ export default class App extends React.Component {
     this.state.clone.splice(index, 1);
     this.setState({ clone: this.state.clone });
   };
+  delfav = (index) => {
+    this.state.favtab.splice(index, 1);
+    this.setState({ favtab: this.state.favtab });
+  };
   addFav = (pos) => {
+    this.setState({ filter: "grayscale(0)" });
     if (this.state.favtab.includes(this.state.clone[pos]))
       alert("This film already exists in your fav list");
     else {
@@ -139,13 +148,10 @@ export default class App extends React.Component {
       this.setState({ favtab: this.state.favtab });
     }
   };
-  delfav = (index) => {
-    this.state.favtab.splice(index, 1);
-    this.setState({ favtab: this.state.favtab });
-  };
   seeTrail = (film) => {
     damnit.splice(0, 1, film);
     this.setState({ desc: damnit });
+    console.log(this.state);
   };
   searchRate = (e) => {
     let y = films;
@@ -157,25 +163,35 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar passSearch={this.searchBN} searchRate={this.searchRate} />
-        <center>
-          <Modal addFilm={this.addFilm} inputChange={this.inputChange} />
-        </center>
-        <BrowserRouter>
-          <List
-            addFav={this.addFav}
-            films={this.state.clone}
-            deletion={this.deleteFilm}
-            seeTrail={this.seeTrail}
-          />
-          <Route
-            path="/favourites"
-            component={() => (
-              <Favourites deletion={this.delfav} favmov={this.state.favtab} />
-            )}
-          />
-          <Description des={this.state.desc} />
-        </BrowserRouter>
+          <BrowserRouter>
+            <Navbar passSearch={this.searchBN} searchRate={this.searchRate} />
+            <Route
+              path="/description"
+              component={() => <Description des={this.state.desc} />}
+            />
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <List
+                  addFav={this.addFav}
+                  films={this.state.clone}
+                  deletion={this.deleteFilm}
+                  seeTrail={this.seeTrail}
+                  state={this.state}
+                  addFilm={this.addFilm}
+                  inputChange={this.inputChange}
+                />
+              )}
+            />
+            <Route
+              path="/favourites"
+              component={() => (
+                <Favourites deletion={this.delfav} favmov={this.state.favtab} />
+              )}
+            />
+          </BrowserRouter>
+      
       </div>
     );
   }
