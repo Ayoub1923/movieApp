@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Favourites from "./components/favourites/favourites";
 import Description from "./components/description/description";
 import "./App.css";
+import Spinner from "./components/Spinner/spinner";
 let films = [
   {
     name: "Shawshunk redemption",
@@ -108,7 +109,14 @@ export default class App extends React.Component {
     favtab: [],
     desc: [],
     visibility: "hidden",
+    spinner: true,
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ spinner: false });
+    }, 5000);
+  }
   searchBN = (e) => {
     let char = e.target.value;
     let movies = films;
@@ -163,6 +171,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        {this.state.spinner ? (
+          <Spinner />
+        ) : (
           <BrowserRouter>
             <Navbar passSearch={this.searchBN} searchRate={this.searchRate} />
             <Route
@@ -191,7 +202,7 @@ export default class App extends React.Component {
               )}
             />
           </BrowserRouter>
-      
+        )}
       </div>
     );
   }
